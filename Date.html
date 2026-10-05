@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Date Question 🌸</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "DM Sans", sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, #fff4f5, transparent 30%),
+        radial-gradient(circle at 90% 90%, #ffe8ef, transparent 30%),
+        #fffafa;
+
+    color: #40272d;
+    overflow-x: hidden;
+}
+
+/* ==============================
+   BACKGROUND
+============================== */
+
+.background-flower {
+    position: fixed;
+    color: #eeb4c1;
+    opacity: 0.35;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.flower1 {
+    top: 10%;
+    left: 8%;
+}
+
+.flower2 {
+    top: 30%;
+    right: 7%;
+}
+
+.flower3 {
+    bottom: 15%;
+    left: 12%;
+}
+
+.flower4 {
+    bottom: 8%;
+    right: 15%;
+}
+
+/* ==============================
+   PAGE
+============================== */
+
+.page {
+    min-height: 100vh;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px 16px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.page.active {
+    display: flex;
+}
+
+/* ==============================
+   CARD
+============================== */
+
+.card {
+    width: 100%;
+    max-width: 650px;
+
+    background: rgba(255,255,255,0.84);
+
+    border: 1px solid rgba(230,190,200,0.35);
+
+    border-radius: 25px;
+
+    padding: 45px 40px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(80,35,45,0.08);
+
+    backdrop-filter: blur(12px);
+
+    animation: cardIn 0.6s ease;
+}
+
+@keyframes cardIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+/* ==============================
+   IMAGE
+============================== */
+
+.hero-image {
+    width: 120px;
+    height: 120px;
+
+    object-fit: cover;
+
+    border-radius: 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 8px 25px rgba(80,30,40,.12);
+}
+
+/* ==============================
+   TEXT
+============================== */
+
+h1 {
+    font-size: 34px;
+    line-height: 1.25;
+
+    color: #542c35;
+
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #97777f;
+    font-size: 15px;
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+.small-note {
+    color: #aa8a91;
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+
+    position: relative;
+
+    min-height: 60px;
+}
+
+.btn {
+    border: none;
+
+    padding: 14px 32px;
+
+    border-radius: 40px;
+
+    font-size: 15px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.btn-primary {
+    background: #ed9fb1;
+    color: #fff;
+
+    box-shadow:
+        0 8px 20px rgba(220,120,140,.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: #e891a5;
+}
+
+.btn-secondary {
+    background: #eeeaf1;
+    color: #765c63;
+}
+
+.btn-secondary:hover {
+    transform: scale(1.03);
+}
+
+/* ==============================
+   FOOD PAGE
+============================== */
+
+.food-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin: 25px 0;
+}
+
+.food-card {
+    border: 2px solid transparent;
+
+    background: #f4f0f6;
+
+    border-radius: 22px;
+
+    padding: 18px 8px;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.food-card:hover {
+    transform: translateY(-3px);
+}
+
+.food-card.selected {
+    border-color: #e8a0b1;
+    background: #fff4f6;
+
+    box-shadow:
+        0 5px 15px rgba(200,100,120,.1);
+}
+
+.food-icon {
+    font-size: 31px;
+    margin-bottom: 8px;
+}
+
+.food-name {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #65434b;
+}
+
+.food-type {
+    font-size: 10px;
+    color: #a98d94;
+
+    margin-top: 5px;
+}
+
+/* ==============================
+   DATE
+============================== */
+
+.date-box {
+    text-align: left;
+    margin: 25px auto;
+
+    max-width: 430px;
+}
+
+.date-label {
+    display: block;
+
+    font-size: 13px;
+
+    color: #80656d;
+
+    margin-bottom: 8px;
+}
+
+.date-input {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 13px;
+
+    border: 1px solid #e4cfd5;
+
+    background: #fff;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    color: #593941;
+
+    outline: none;
+}
+
+.date-input:focus {
+    border-color: #e59cac;
+}
+
+/* ==============================
+   YES PAGE
+============================== */
+
+.yes-big {
+    font-size: 40px;
+    font-weight: 700;
+
+    color: #542c35;
+
+    line-height: 1.2;
+
+    margin-bottom: 12px;
+}
+
+.emoji-image {
+    width: 140px;
+    height: 140px;
+
+    object-fit: cover;
+
+    border-radius: 24px;
+
+    margin-bottom: 22px;
+}
+
+/* ==============================
+   FINAL PAGE
+============================== */
+
+.final-photo {
+    width: 130px;
+    height: 130px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    margin-bottom: 25px;
+}
+
+.final-details {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    background: #fff4f6;
+
+    text-align: left;
+}
+
+.detail {
+    padding: 8px 0;
+
+    color: #70545c;
+
+    font-size: 14px;
+}
+
+.detail strong {
+    color: #523139;
+}
+
+.final-message {
+    margin-top: 25px;
+
+    color: #765b63;
+
+    font-style: italic;
+
+    line-height: 1.7;
+}
+
+/* ==============================
+   SMALL BUTTON
+============================== */
+
+.continue-btn {
+    margin-top: 10px;
+
+    min-width: 180px;
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:600px) {
+
+    .card {
+        padding: 35px 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .food-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .food-card {
+        padding: 16px 6px;
+    }
+
+    .button-row {
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 13px 25px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Background decoration -->
+
+<div class="background-flower flower1">✿</div>
+<div class="background-flower flower2">✿</div>
+<div class="background-flower flower3">✿</div>
+<div class="background-flower flower4">✿</div>
+
+
+<!-- =========================================
+     PAGE 1
+========================================= -->
+
+<section class="page active" id="page1">
+
+<div class="card">
+
+    <!-- Replace this image URL with your own photo -->
+    <img
+        class="hero-image"
+        src="https://images.unsplash.com/photo-1496387314164-18b01044f754?auto=format&fit=crop&w=500&q=80"
+        alt="Cute"
+    >
+
+    <h1>
+        🌸 Will you go on a date with me? 🌸
+    </h1>
+
+    <p class="subtitle">
+
+        I have a very important question for you...
+
+        <br><br>
+
+        Would you like to spend some time with me,
+        eat something delicious and make a nice memory together?
+
+    </p>
+
+
+    <div class="button-row">
+
+        <button
+            class="btn btn-primary"
+            onclick="goToFood()">
+
+            YES 💗
+
+        </button>
+
+
+        <button
+            class="btn btn-secondary"
+            id="noBtn">
+
+            no... 🥺
+
+        </button>
+
+    </div>
+
+
+    <p class="small-note">
+        choose carefully... :)
+    </p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     PAGE 2 — FOOD
+========================================= -->
+
+<section class="page" id="page2">
+
+<div class="card">
+
+    <div style="font-size:42px;margin-bottom:10px;">
+        🍽️✨
+    </div>
+
+    <h1>
+        What are we feeling?
+    </h1>
+
+    <p class="subtitle">
+        Pick somewhere in Bardoli where you'd like us to eat.
+    </p>
+
+
+    <div class="food-grid">
+
+
+        <div class="food-card"
+             data-place="P'S Delicacies">
+
+            <div class="food-icon">🍕</div>
+
+            <div class="food-name">
+                P'S Delicacies
+            </div>
+
+            <div class="food-type">
+                Pizza / Italian
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="B’S Charcoal Pizza Farm">
+
+            <div class="food-icon">🍕</div>
+
+            <div class="food-name">
+                B’S Charcoal Pizza Farm
+            </div>
+
+            <div class="food-type">
+                Pizza
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="Pizza Hut - Callista Mall">
+
+            <div class="food-icon">🍕</div>
+
+            <div class="food-name">
+                Pizza Hut
+            </div>
+
+            <div class="food-type">
+                Pizza
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="Basil Leaf">
+
+            <div class="food-icon">🍝</div>
+
+            <div class="food-name">
+                Basil Leaf
+            </div>
+
+            <div class="food-type">
+                Multi Cuisine
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="Hotel Vrajbhumi">
+
+            <div class="food-icon">🍛</div>
+
+            <div class="food-name">
+                Hotel Vrajbhumi
+            </div>
+
+            <div class="food-type">
+                Gujarati / Indian
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="Red Chillies">
+
+            <div class="food-icon">🌶️</div>
+
+            <div class="food-name">
+                Red Chillies
+            </div>
+
+            <div class="food-type">
+                Restaurant
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="The Lakeview Restaurant">
+
+            <div class="food-icon">🍽️</div>
+
+            <div class="food-name">
+                The Lakeview
+            </div>
+
+            <div class="food-type">
+                Restaurant
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="Ramanam Bardoli">
+
+            <div class="food-icon">🥘</div>
+
+            <div class="food-name">
+                Ramanam
+            </div>
+
+            <div class="food-type">
+                South Indian
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="395 The Kafe & Restaurant">
+
+            <div class="food-icon">☕</div>
+
+            <div class="food-name">
+                395 The Kafe
+            </div>
+
+            <div class="food-type">
+                Cafe / Restaurant
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="The Blue Dot Restaurant">
+
+            <div class="food-icon">🍔</div>
+
+            <div class="food-name">
+                The Blue Dot
+            </div>
+
+            <div class="food-type">
+                Fast Food
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="DDC Cafe Bardoli">
+
+            <div class="food-icon">☕</div>
+
+            <div class="food-name">
+                DDC Cafe
+            </div>
+
+            <div class="food-type">
+                Cafe
+            </div>
+
+        </div>
+
+
+
+        <div class="food-card"
+             data-place="Jalaram Khichdi Centre">
+
+            <div class="food-icon">🍚</div>
+
+            <div class="food-name">
+                Jalaram Khichdi
+            </div>
+
+            <div class="food-type">
+                Gujarati
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <button
+        class="btn btn-primary continue-btn"
+        id="foodContinue"
+        disabled>
+
+        this one! →
+
+    </button>
+
+
+    <p class="small-note">
+        You choose the food. I'll handle the rest. :)
+    </p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     PAGE 3 — DATE
+========================================= -->
+
+<section class="page" id="page3">
+
+<div class="card">
+
+    <div style="font-size:45px;margin-bottom:15px;">
+        📅🐾
+    </div>
+
+
+    <h1>
+        So... when are you free?
+    </h1>
+
+
+    <p class="subtitle">
+        Pick a day for our little adventure.
+    </p>
+
+
+    <div class="date-box">
+
+        <label
+            class="date-label"
+            for="date">
+
+            Pick a Day ✨
+
+        </label>
+
+
+        <input
+            type="date"
+            id="date"
+            class="date-input"
+        >
+
+    </div>
+
+
+    <button
+        class="btn btn-primary continue-btn"
+        id="dateContinue"
+        disabled>
+
+        set the date! 🌷 →
+
+    </button>
+
+
+    <p class="small-note">
+        Don't worry, I'll make it worth it.
+    </p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     PAGE 4 — SURPRISE
+========================================= -->
+
+<section class="page" id="page4">
+
+<div class="card">
+
+    <img
+        class="emoji-image"
+        src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
+        alt="Surprise"
+    >
+
+
+    <div class="yes-big">
+        WAIT...<br>
+        YOU ACTUALLY SAID YES?? 😭
+    </div>
+
+
+    <p class="subtitle">
+
+        I was genuinely prepared for you to say no. 🥺
+
+        <br><br>
+
+        This just made my day.
+
+    </p>
+
+
+    <button
+        class="btn btn-primary continue-btn"
+        onclick="goToFinal()">
+
+        okay okay! →
+
+    </button>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     PAGE 5 — FINAL
+========================================= -->
+
+<section class="page" id="page5">
+
+<div class="card">
+
+    <img
+        class="final-photo"
+        src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=400&q=80"
+        alt="Date"
+    >
+
+
+    <h1>
+        Glad you didn't say no. 🌸
+    </h1>
+
+
+    <p class="subtitle">
+
+        Be ready.
+
+        <br><br>
+
+        I'll come to get you. 🚗
+
+    </p>
+
+
+    <div class="final-details">
+
+        <div class="detail">
+
+            📅
+
+            <strong>
+                Date:
+            </strong>
+
+            <span id="finalDate">
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            🍽️
+
+            <strong>
+                Food:
+            </strong>
+
+            <span id="finalFood">
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <p class="final-message">
+
+        Normal people text.
+
+        <br>
+
+        I made you a whole website during lunch
+        just to ask you out. 🌷
+
+    </p>
+
+
+    <div
+        style="
+        margin-top:25px;
+        font-size:22px;
+        ">
+
+        ♡ ♡ ♡
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<script>
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+let selectedFood = "";
+
+let selectedDate = "";
+
+
+/* =========================================
+   PAGE SWITCH
+========================================= */
+
+function showPage(pageNumber) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById("page" + pageNumber)
+        .classList.add("active");
+
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* =========================================
+   PAGE 1 → FOOD
+========================================= */
+
+function goToFood() {
+
+    showPage(2);
+
+}
+
+
+/* =========================================
+   NO BUTTON
+========================================= */
+
+const noBtn =
+    document.getElementById("noBtn");
+
+
+function escapeNo() {
+
+    const buttonRow =
+        document.querySelector(".button-row");
+
+
+    const rowWidth =
+        buttonRow.clientWidth;
+
+
+    const rowHeight =
+        buttonRow.clientHeight;
+
+
+    const buttonWidth =
+        noBtn.offsetWidth;
+
+
+    const buttonHeight =
+        noBtn.offsetHeight;
+
+
+    const maxX =
+        Math.max(
+            0,
+            rowWidth - buttonWidth
+        );
+
+
+    const maxY =
+        Math.max(
+            0,
+            rowHeight - buttonHeight
+        );
+
+
+    const x =
+        Math.random() * maxX;
+
+
+    const y =
+        Math.random() * maxY;
+
+
+    noBtn.style.position =
+        "absolute";
+
+
+    noBtn.style.left =
+        x + "px";
+
+
+    noBtn.style.top =
+        y + "px";
+
+}
+
+
+noBtn.addEventListener(
+    "mouseenter",
+    escapeNo
+);
+
+
+noBtn.addEventListener(
+    "touchstart",
+    function(event) {
+
+        event.preventDefault();
+
+        escapeNo();
+
+    }
+);
+
+
+/* =========================================
+   FOOD SELECTION
+========================================= */
+
+const foodCards =
+    document.querySelectorAll(
+        ".food-card"
+    );
+
+
+const foodContinue =
+    document.getElementById(
+        "foodContinue"
+    );
+
+
+foodCards.forEach(card => {
+
+    card.addEventListener(
+        "click",
+        function() {
+
+            foodCards.forEach(
+                item =>
+                item.classList.remove(
+                    "selected"
+                )
+            );
+
+
+            card.classList.add(
+                "selected"
+            );
+
+
+            selectedFood =
+                card.dataset.place;
+
+
+            foodContinue.disabled =
+                false;
+
+        }
+    );
+
+});
+
+
+foodContinue.addEventListener(
+    "click",
+    function() {
+
+        if (!selectedFood)
+            return;
+
+
+        showPage(3);
+
+    }
+);
+
+
+/* =========================================
+   DATE
+========================================= */
+
+const dateInput =
+    document.getElementById("date");
+
+
+const dateContinue =
+    document.getElementById(
+        "dateContinue"
+    );
+
+
+/* Don't allow yesterday */
+
+const today =
+    new Date();
+
+
+const yyyy =
+    today.getFullYear();
+
+
+const mm =
+    String(
+        today.getMonth() + 1
+    ).padStart(2, "0");
+
+
+const dd =
+    String(
+        today.getDate()
+    ).padStart(2, "0");
+
+
+dateInput.min =
+    `${yyyy}-${mm}-${dd}`;
+
+
+dateInput.addEventListener(
+    "change",
+    function() {
+
+        if (dateInput.value) {
+
+            selectedDate =
+                dateInput.value;
+
+
+            dateContinue.disabled =
+                false;
+
+        }
+
+    }
+);
+
+
+dateContinue.addEventListener(
+    "click",
+    function() {
+
+        if (!selectedDate)
+            return;
+
+
+        showPage(4);
+
+    }
+);
+
+
+/* =========================================
+   FINAL PAGE
+========================================= */
+
+function goToFinal() {
+
+    const date =
+        new Date(
+            selectedDate + "T00:00:00"
+        );
+
+
+    const formattedDate =
+        date.toLocaleDateString(
+            "en-IN",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    document.getElementById(
+        "finalDate"
+    ).textContent =
+        formattedDate;
+
+
+    document.getElementById(
+        "finalFood"
+    ).textContent =
+        selectedFood;
+
+
+    showPage(5);
+
+}
+
+</script>
+
+</body>
+</html>
